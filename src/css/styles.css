@@ -1,3 +1,98 @@
 body {
     background-color: darkcyan;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    font-size: 1rem;
+    display: grid;
+    grid-template-rows: 4em 21em 4em 11em;
+}
+
+#whatsagram {
+    background-color: darkslategray;
+    color: white;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+/*.fila1, .fila2, .fila3, .fila4 {
+    background-color: royalblue;
+}*/
+
+.msg {
+    /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea,
+    alineado a la derecha y con margen a la izquierda */
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: wrap column;
+    margin-left: 4rem;
+    margin-right: 0.5rem;
+}
+
+.msg div {
+    /* Los mensajes individualmente tienen su fondo y margen entre ellos */
+    background-color: #E1FFC7;
+    padding: 10px;
+    border-radius: 7px;
+    margin: 0.2rem;
+    text-align: right;
+}
+
+.msgtyping {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: slategray;
+    position: sticky;
+    bottom: 11em;
+}
+
+#textarea {
+    /* Tiene las dimensiones predefinidas y la posibilidad de cambiar de tamaño está bloqueada */
+    background-color: white;
+    width: 15rem;
+    height: 1.2rem;
+    padding: 10px;
+    border-radius: 7px;
+    margin: 5px;
+    flex-wrap: wrap;
+    resize: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1rem;
+}
+
+#send {
+    width: 1.5rem;
+    background-color: mediumseagreen;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.teclado {
+    display: flex;
+    flex-flow: column wrap;
+    background-color: rgba(198, 224, 210, 0.5);
+    align-items: center;
+    position: sticky;
+}
+
+.teclado div div {
+    display: inline-flex;
+    background-color: aquamarine;
+    padding: 1.5vw;
+    border: solid 1px black;
+    border-radius: 3px;
+    font-size: 1.4rem;
+}
+
+.del {
+    width: 1.5rem;
+}
+
+.space {
+    width: 5rem;
+}
+
+div div div:hover {
+    background-color: rgba(198, 224, 210, 0.5);
 }
