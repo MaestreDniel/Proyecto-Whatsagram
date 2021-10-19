@@ -1,5 +1,7 @@
 body {
-    background-color: darkcyan;
+    /* Lo uso como el contenedor global, así que el layout principal lo hago aquí con grid */
+    /* background-color: darkcyan; */
+    background-image: url(../images/backgroundimg/grand-canyon-colorado-river.jpg);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin: 0;
     font-size: 1rem;
@@ -20,13 +22,15 @@ body {
 }*/
 
 .msg {
-    /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea,
-    alineado a la derecha y con margen a la izquierda */
+    /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea y 
+    en una sola columna, alineado a la derecha y con margen a la izquierda */
     display: flex;
-    justify-content: flex-end;
-    flex-flow: wrap column;
     margin-left: 4rem;
     margin-right: 0.5rem;
+    overflow: auto;
+    flex-flow: column;
+    text-align: left;
+    align-items: flex-end;
 }
 
 .msg div {
@@ -35,22 +39,25 @@ body {
     padding: 10px;
     border-radius: 7px;
     margin: 0.2rem;
-    text-align: right;
+    width: fit-content;
 }
 
 .msgtyping {
+    /* Esto es la zona donde irá apareciendo el mensaje a medida que se escriba */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: slategray;
-    position: sticky;
+    position: absolute;
     bottom: 11em;
+    padding: 2vw;
+    padding-right: 4vw;
 }
 
 #textarea {
     /* Tiene las dimensiones predefinidas y la posibilidad de cambiar de tamaño está bloqueada */
     background-color: white;
-    width: 15rem;
+    width: 17rem;
     height: 1.2rem;
     padding: 10px;
     border-radius: 7px;
@@ -68,18 +75,25 @@ body {
     padding: 5px;
 }
 
+#send:hover {
+    background-color: rgba(198, 224, 210, 0.5);
+}
+
 .teclado {
+    /* Es el contenedor de todo el teclado, que distribuye las teclas al estilo qwerty */
     display: flex;
     flex-flow: column wrap;
-    background-color: rgba(198, 224, 210, 0.5);
+    background-color: rgba(198, 224, 210, 0.7);
     align-items: center;
-    position: sticky;
+    position: absolute;
+    bottom: 0;
 }
 
 .teclado div div {
+    /* Estas son las teclas individuales */
     display: inline-flex;
     background-color: aquamarine;
-    padding: 1.5vw;
+    padding: 2.31vw;
     border: solid 1px black;
     border-radius: 3px;
     font-size: 1.4rem;
