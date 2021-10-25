@@ -1,20 +1,37 @@
 body {
-    /* Lo uso como el contenedor global, así que el layout principal lo hago aquí con grid */
-    /* background-color: darkcyan; */
-    background-image: url(../images/backgroundimg/grand-canyon-colorado-river.jpg);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 0;
-    font-size: 1rem;
-    display: grid;
-    grid-template-rows: 4em 21em 4em 11em;
+  /* Lo uso como el contenedor global, así que el layout principal lo hago aquí con grid */
+  /* background-color: darkcyan; */
+  background-image: url(../images/backgroundimg/grand-canyon-colorado-river.jpg);
+  font-family: 'Cabin', sans-serif;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 10vh 52vh 10vh 28vh;
 }
 
-#whatsagram {
-    background-color: darkslategray;
-    color: white;
-    padding: 1rem;
-    font-size: 1.5rem;
-    font-weight: bolder;
+header {
+  background-color: darkslategray;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+header div {
+  color: white;
+  padding: 3vh;
+  font-size: 3.5vh;
+  font-weight: bolder;
+}
+
+#light {
+  position: relative;
+  right: 2vw;
+  margin-top: 1vw;
+  width: 15vw;
+  height: 15vw;
+}
+
+#dark {
+  display: none;
 }
 
 /*.fila1, .fila2, .fila3, .fila4 {
@@ -22,91 +39,154 @@ body {
 }*/
 
 .msg {
-    /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea y 
+  /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea y 
     en una sola columna, alineado a la derecha y con margen a la izquierda */
-    display: flex;
-    margin-left: 4rem;
-    margin-right: 0.5rem;
-    overflow: auto;
-    flex-flow: column;
-    text-align: left;
-    align-items: flex-end;
+  display: flex;
+  margin-left: 4rem;
+  margin-right: 0.5rem;
+  overflow: auto;
+  flex-flow: column;
+  text-align: left;
+  align-items: flex-end;
 }
 
 .msg div {
-    /* Los mensajes individualmente tienen su fondo y margen entre ellos */
-    background-color: #E1FFC7;
-    padding: 10px;
-    border-radius: 7px;
-    margin: 0.2rem;
-    width: fit-content;
+  /* Los mensajes individualmente tienen su fondo y margen entre ellos */
+  border-radius: 7px;
+  width: fit-content;
+  display: inline;
+}
+
+.msgbody {
+  background-color: #e1ffc7;
+  margin: 0.2rem;
+  padding: 7px 3px 7px 7px;
 }
 
 .msgtyping {
-    /* Esto es la zona donde irá apareciendo el mensaje a medida que se escriba */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: slategray;
-    position: absolute;
-    bottom: 11em;
-    padding: 2vw;
-    padding-right: 4vw;
+  /* Esto es la zona donde irá apareciendo el mensaje a medida que se escriba */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: slategray;
+  position: absolute;
+  bottom: 11em;
+  padding: 2vw;
+  padding-right: 4vw;
+}
+
+.hour {
+  padding: 7px 3px 7px 7px;
+  font-size: 0.7rem;
+}
+
+#emojigif {
+  width: 10vw;
+}
+
+#emojigif:active {
+  background-color: rgba(198, 224, 210, 0.5);
 }
 
 #textarea {
-    /* Tiene las dimensiones predefinidas y la posibilidad de cambiar de tamaño está bloqueada */
-    background-color: white;
-    width: 17rem;
-    height: 1.2rem;
-    padding: 10px;
-    border-radius: 7px;
-    margin: 5px;
-    flex-wrap: wrap;
-    resize: none;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 1rem;
+  /* Tiene las dimensiones predefinidas y la posibilidad de cambiar de tamaño está bloqueada */
+  background-color: white;
+  width: 65vw;
+  height: 3vh;
+  padding: 1.5vh;
+  border-radius: 7px;
+  margin: 1.5vw;
+  resize: none;
+  font-family: Calibri;
+  font-size: 1rem;
 }
 
 #send {
-    width: 1.5rem;
-    background-color: mediumseagreen;
-    border-radius: 20px;
-    padding: 5px;
+  width: 6.2vw;
+  background-color: mediumseagreen;
+  border-radius: 10vw;
+  padding: 2vw;
 }
 
-#send:hover {
-    background-color: rgba(198, 224, 210, 0.5);
+#send:active {
+  background-color: rgba(198, 224, 210, 0.5);
+}
+
+#sendblocked {
+  width: 11.4vw;
+  bottom: 2.2vh;
+  position: absolute;
+  right: 3.6vw;
+}
+
+#sendallowed {
+  display: none;
 }
 
 .teclado {
-    /* Es el contenedor de todo el teclado, que distribuye las teclas al estilo qwerty */
-    display: flex;
-    flex-flow: column wrap;
-    background-color: rgba(198, 224, 210, 0.7);
-    align-items: center;
-    position: absolute;
-    bottom: 0;
+  /* Es el contenedor de todo el teclado, que distribuye las teclas al estilo qwerty */
+  display: flex;
+  flex-flow: column;
+  background-color: rgba(198, 224, 210, 0.7);
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
 }
 
 .teclado div div {
-    /* Estas son las teclas individuales */
-    display: inline-flex;
-    background-color: aquamarine;
-    padding: 2.31vw;
-    border: solid 1px black;
-    border-radius: 3px;
-    font-size: 1.4rem;
+  /* Estas son las teclas individuales */
+  display: inline-flex;
+  background-color: aquamarine;
+  width: 8.53vw;
+  height: 6.6vh;
+  border: solid 1px black;
+  border-radius: 6px;
+  font-size: 7vw;
+  align-items: center;
+  justify-content: center;
 }
 
-.del {
-    width: 1.5rem;
+#del {
+  width: 18.5vw;
 }
 
-.space {
-    width: 5rem;
+#space {
+  width: 38.7vw;
 }
 
-div div div:hover {
-    background-color: rgba(198, 224, 210, 0.5);
+.teclado div div:active {
+  background-color: rgb(198, 224, 210);
+}
+
+#ehidden {
+  display: none;
+}
+
+#emojiactive {
+  display: grid;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(198, 224, 210);
+  grid-template-columns: 16.66vw 16.66vw 16.66vw 16.66vw 16.66vw 16.66vw;
+  grid-template-rows: 9.33vh 9.33vh 9.33vh;
+}
+
+#emojiactive div {
+  font-size: 12vw;
+}
+
+#emojiactive div:active {
+  background-color: rgba(81, 184, 129, 0.5);
+}
+
+.fechahoy {
+  background-color: #c7fbff;
+  position: sticky;
+  position: -webkit-sticky;
+  font-size: 6vw;
+  padding: 2vw;
+  margin: 3vw;
+  right: 25vw;
+  top: 4px;
 }
