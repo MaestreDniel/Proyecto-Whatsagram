@@ -93,9 +93,9 @@ imprimeFechaActual();
 
 function envioBlock() {
     if (document.getElementById("textarea").value == "") {
-        document.getElementsByClassName("switchsend")[0].setAttribute("id", "sendblocked");
+        document.getElementsByClassName("switch")[2].setAttribute("id", "sendblocked");
     } else if (document.getElementById("textarea").value !== "") {
-        document.getElementsByClassName("switchsend")[0].setAttribute("id", "sendallowed");
+        document.getElementsByClassName("switch")[2].setAttribute("id", "sendallowed");
     }
 }
 
@@ -209,6 +209,12 @@ function emojiMenu() {
 
 document.getElementById("emojigif").addEventListener("click", function () {
     emojiMenu();
+    botonTeclEmoji();
+});
+
+document.getElementById("tecladobotoff").addEventListener("click", function () {
+    emojiMenu();
+    botonTeclEmoji();
 });
 
 for (let i = 0; i < emojis.length; i++)(
@@ -222,6 +228,20 @@ function imprimirEmoji(emojis) {
     let emojisss = document.getElementById(emojis);
     document.getElementById("textarea").value += emojisss.textContent;
     envioBlock();
+}
+
+let emojiboton = true;
+
+function botonTeclEmoji() {
+    if (emojiboton) {
+        document.getElementsByClassName("switch")[0].setAttribute("id", "emojioff");
+        document.getElementsByClassName("switch")[1].setAttribute("id", "tecladoboton");
+        emojiboton = false;
+    } else if (!emojiboton) {
+        document.getElementsByClassName("switch")[0].setAttribute("id", "emojigif");
+        document.getElementsByClassName("switch")[1].setAttribute("id", "tecladobotoff");
+        emojiboton = true;
+    }
 }
 
 /**

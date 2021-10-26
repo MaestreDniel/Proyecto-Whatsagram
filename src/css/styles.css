@@ -1,8 +1,15 @@
+:root {
+  --main-font-family: 'Cabin', sans-serif;
+  --main-background-color: rgb(217, 231, 221);
+  --alternate-background-color: rgb(148, 206, 255);
+  --main-sending-color: rgb(162, 162, 162);
+  --alternate-sending-color: rgb(52, 70, 85);
+}
+
 body {
   /* Lo uso como el contenedor global, así que el layout principal lo hago aquí con grid */
-  /* background-color: darkcyan; */
   background-image: url(../images/backgroundimg/grand-canyon-colorado-river.jpg);
-  font-family: 'Cabin', sans-serif;
+  font-family: var(--main-font-family);
   margin: 0;
   display: grid;
   grid-template-rows: 10vh 52vh 10vh 28vh;
@@ -25,18 +32,14 @@ header div {
 #light {
   position: relative;
   right: 2vw;
-  margin-top: 1vw;
-  width: 15vw;
-  height: 15vw;
+  margin-top: 0.2vh;
+  width: 4rem;
+  height: 3.5rem;
 }
 
 #dark {
   display: none;
 }
-
-/*.fila1, .fila2, .fila3, .fila4 {
-    background-color: royalblue;
-}*/
 
 .msg {
   /* Contenedor de los mensajes, que hace que cada mensaje esté en su línea y 
@@ -68,11 +71,12 @@ header div {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: slategray;
+  background: linear-gradient(150deg, var(--main-sending-color), var(--alternate-sending-color));
   position: absolute;
-  bottom: 11em;
-  padding: 2vw;
-  padding-right: 4vw;
+  bottom: 27.5vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  width: 100vw;
 }
 
 .hour {
@@ -80,8 +84,13 @@ header div {
   font-size: 0.7rem;
 }
 
-#emojigif {
+#emojioff, #tecladobotoff {
+  display: none;
+}
+
+#tecladoboton, #emojigif {
   width: 10vw;
+  display: inline;
 }
 
 #emojigif:active {
@@ -97,13 +106,12 @@ header div {
   border-radius: 7px;
   margin: 1.5vw;
   resize: none;
-  font-family: Calibri;
   font-size: 1rem;
 }
 
 #send {
   width: 6.2vw;
-  background-color: mediumseagreen;
+  background-color: #33cc6c;
   border-radius: 10vw;
   padding: 2vw;
 }
@@ -114,9 +122,9 @@ header div {
 
 #sendblocked {
   width: 11.4vw;
-  bottom: 2.2vh;
+  bottom: 2vh;
   position: absolute;
-  right: 3.6vw;
+  right: 2.5vw;
 }
 
 #sendallowed {
@@ -127,7 +135,7 @@ header div {
   /* Es el contenedor de todo el teclado, que distribuye las teclas al estilo qwerty */
   display: flex;
   flex-flow: column;
-  background-color: rgba(198, 224, 210, 0.7);
+  background: linear-gradient(150deg, var(--main-background-color), var(--alternate-background-color));
   align-items: center;
   position: absolute;
   bottom: 0;
@@ -137,8 +145,8 @@ header div {
 .teclado div div {
   /* Estas son las teclas individuales */
   display: inline-flex;
-  background-color: aquamarine;
-  width: 8.53vw;
+  background: linear-gradient(150deg, var(--main-background-color), var(--alternate-background-color));
+  width: 8.3vw;
   height: 6.6vh;
   border: solid 1px black;
   border-radius: 6px;
@@ -152,11 +160,11 @@ header div {
 }
 
 #space {
-  width: 38.7vw;
+  width: 38vw;
 }
 
 .teclado div div:active {
-  background-color: rgb(198, 224, 210);
+  background: rgb(121, 229, 243);
 }
 
 #ehidden {
@@ -167,7 +175,7 @@ header div {
   display: grid;
   position: absolute;
   bottom: 0;
-  background-color: rgb(198, 224, 210);
+  background: linear-gradient(150deg, var(--main-background-color), var(--alternate-background-color));
   grid-template-columns: 16.66vw 16.66vw 16.66vw 16.66vw 16.66vw 16.66vw;
   grid-template-rows: 9.33vh 9.33vh 9.33vh;
 }
