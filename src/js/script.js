@@ -1,15 +1,14 @@
 /**
  * @author: Daniel Maestre Hermoso
  * Fecha inicio: 14/10/2021
- * Fecha fin: 
+ * Fecha fin: 29/10/2021
  * Asignatura: Entorno Cliente y Diseño de Interfaces
- * @version: 0.8
+ * @version: 1.0
  */
 
-/**
- * TODO: Que funcione para cada tecla individualmente OK
- */
+// TODO: Redactar el README (OK), allí se explican bien todos los requisitos logrados
 
+// TODO: Que funcione para cada tecla individualmente (OK)
 
 let tecla = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
     "a", "s", "d", "f", "g", "h", "j", "k", "l", "ñ",
@@ -28,16 +27,27 @@ for (let i = 0; i < tecla.length; i++) {
     });
 }
 
+/**
+ * Esta función recoge la letra que corresponde a cada tecla de la keyboard area para ir añadiendo las teclas
+ * a la textarea. Se basa en las id que están asignadas en el html a cada botón, que los paso por parámetro
+ * @param {string} tecla 
+ */
+
 function imprimirTecla(tecla) {
     let teclado = document.getElementById(tecla);
     // document.getElementById("textarea").innerHTML += teclado.innerHTML; 
     // Con la línea de arriba hay un bug que hace que deje de funcionar si escribo en el teclado real
-    document.getElementById("textarea").value += teclado.textContent;
+    if (tecla != "space") {
+        document.getElementById("textarea").value += teclado.textContent;
+    } else {
+        document.getElementById("textarea").value += " ";
+        // TODO: Arregla un problema de detección del espacio en la tecla CE. (OK)
+        // El espacio de la keyboard area es un &nbsp porque de lo contrario se descuadra en el css
+    }
     if (valor === 1) {
         valor--;
         minusMayus();
     }
-    envioBlock();
 }
 
 let i = 0;
@@ -56,7 +66,12 @@ function crearDiv() {
     document.getElementsByClassName("msg")[0].appendChild(div);
 }
 
-function enviarMsg() {
+/**
+ * Recoge el contenido de textarea y pone cada elemento del mensaje en su sitio. Esta función se apoya de
+ * muchas otras para el funcionamiento correcto de esta aplicación.
+ */
+
+function enviarMsg() { // TODO: Que se impriman los mensajes escritos desde el teclado a la msgarea (OK)
     // El string mide 2, si solo mide 1, le añade el 0
     let actual = new Date();
     let horas = actual.getHours() + ":" + String(actual.getMinutes()).padStart(2, "0");
@@ -67,9 +82,8 @@ function enviarMsg() {
     document.getElementsByClassName("msgbody")[i].appendChild(horasend);
     i++;
     document.getElementById("textarea").value = "";
-    valor = 1
+    valor = 1;
     minusMayus();
-    envioBlock();
     updateScroll();
 }
 
@@ -77,7 +91,11 @@ document.getElementById("send").addEventListener("click", function () {
     enviarMsg();
 });
 
-function imprimeFechaActual() {
+/**
+ * Fija la fecha actual en la parte superior de la pantalla
+ */
+
+function imprimeFechaActual() { // TODO: Colocar la fecha actual (OK)
     let fecha = new Date();
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -91,17 +109,9 @@ function imprimeFechaActual() {
 
 imprimeFechaActual();
 
-function envioBlock() {
-    if (document.getElementById("textarea").value == "") {
-        document.getElementsByClassName("switch")[2].setAttribute("id", "sendblocked");
-    } else if (document.getElementById("textarea").value !== "") {
-        document.getElementsByClassName("switch")[2].setAttribute("id", "sendallowed");
-    }
-}
-
-function teclaC() {
+// TODO: Las teclas especiales: C, CE, DELETE (los dos tipos), etc. (OK)
+function teclaC() { // Lo único que hace es borrar todo el contenido de textarea al pulsar esta tecla
     document.getElementById("textarea").value = "";
-    envioBlock();
 }
 
 document.getElementById("Cdel").addEventListener("click", function () {
@@ -111,30 +121,32 @@ document.getElementById("Cdel").addEventListener("click", function () {
 function teclaCE() {
     let textarea = document.getElementById("textarea").value;
     //textarea -= textarea.lastIndexOf(" ", textarea.length);
-    let sequeda = textarea.slice(textarea[0], textarea.lastIndexOf(" ", textarea.length));
-    // Esto usa non breaking space (&nbsp), es distinto al espacio que usamos directamente en el teclado físico
+    //textarea.trim();
+    let sequeda = textarea.slice(textarea[0], textarea.lastIndexOf(" ", textarea.length));
+    /* if (textarea.lastIndexOf(" ", textarea.length)) {
+        sequeda = textarea.slice(textarea[0], textarea.lastIndexOf(" ", textarea.length));
+    } else {
+        sequeda = "";
+    } */
     document.getElementById("textarea").value = sequeda;
-    envioBlock();
 }
 
 document.getElementById("CEdel").addEventListener("click", function () {
     teclaCE();
 });
 
-function teclaDel() {
+function teclaDel() { // Es la tecla borrar tradicional
     let textarea = document.getElementById("textarea").value;
     document.getElementById("textarea").value = textarea.slice(0, -1);
-    envioBlock();
 }
 
 document.getElementById("del").addEventListener("click", function () {
     teclaDel();
 });
 
-function teclaDelReverse() {
+function teclaDelReverse() { // La tecla borrar, pero al revés
     let textarea = document.getElementById("textarea").value;
     document.getElementById("textarea").value = textarea.slice(1);
-    envioBlock();
 }
 
 document.getElementById("delreverse").addEventListener("click", function () {
@@ -142,7 +154,7 @@ document.getElementById("delreverse").addEventListener("click", function () {
 });
 
 function saltoLinea() {
-    // TODO: Arreglarlo bien
+    // TODO: No he llegado a arreglarlo bien.
     let salto = "\n";
     document.getElementById("textarea").value += salto;
 }
@@ -154,12 +166,20 @@ document.getElementById("line").addEventListener("click", function () {
 let shiftmayus = ["&#8593", "&#8657", "&#8679"];
 let valor = 1;
 
+/**
+ * Inicialmente declaro un valor que es igual a 1. Cuando estoy en el caso 0, el teclado se pone
+ * permanentemente en minúsculas. El 1 escribe la primera letra en mayúscula, y default hace que 
+ * las mayúsculas sean permanentes. En la práctica, el valor llega hasta 2 y luego baja otra vez
+ * a 0 o 1. Voy llamando a esta función y alterando la variable "valor" según sea necesario.
+ */
+
 function minusMayus() {
     switch (valor) {
         case 0:
             document.getElementById("mayus").innerHTML = shiftmayus[0]; // Cambia la tecla mayus
             for (let i = 0; i < tecla.length - 3; i++) {
-                document.getElementById(tecla[i]).innerHTML = tecla[i]; // Cambia todo el teclado
+                document.getElementById(tecla[i]).innerHTML = tecla[i];
+                // Cambia todo el teclado, excepto la coma, el espacio y el punto
             }
             break;
 
@@ -179,7 +199,7 @@ function minusMayus() {
     }
 }
 
-document.getElementById("mayus").addEventListener("click", function () {
+document.getElementById("mayus").addEventListener("click", function () { // Añado el evento en la tecla mayus
     if (valor < 2) {
         valor++;
         minusMayus();
@@ -189,22 +209,14 @@ document.getElementById("mayus").addEventListener("click", function () {
     }
 });
 
-
 let emojis = ["laughing", "sad", "scared", "angry", "hearteyes", "evil",
     "beer", "biceps", "guitar", "redheart", "surprised", "goldmedal",
     "chartincrease", "mobile", "partypopper", "fire", "thumbsup", "waving"
 ]
 
-let showemojis = false;
-
-function emojiMenu() {
-    if (showemojis === false) {
-        document.getElementsByClassName("emojiboard")[0].setAttribute("id", "emojiactive");
-        showemojis = true;
-    } else if (showemojis === true) {
-        document.getElementsByClassName("emojiboard")[0].setAttribute("id", "ehidden");
-        showemojis = false;
-    }
+function emojiMenu() { // TODO: Muestra el panel de los emojis (OK)
+    let panel = document.getElementsByClassName("emojiboard")[0];
+    panel.classList.toggle("emojiactive");
 }
 
 document.getElementById("emojigif").addEventListener("click", function () {
@@ -217,40 +229,47 @@ document.getElementById("tecladobotoff").addEventListener("click", function () {
     botonTeclEmoji();
 });
 
-for (let i = 0; i < emojis.length; i++)(
+for (let i = 0; i < emojis.length; i++) {
     document.getElementById(emojis[i]).addEventListener("click", function () {
         //imprimirTecla(tecla[i]);
         imprimirEmoji(emojis[i]);
     })
-)
+}
+
+/**
+ * Trato a los emojis de manera análoga a los caracteres normales del teclado, los voy recogiendo
+ * según la id que tienen asignada
+ * @param {string} emojis 
+ */
 
 function imprimirEmoji(emojis) {
     let emojisss = document.getElementById(emojis);
     document.getElementById("textarea").value += emojisss.textContent;
-    envioBlock();
 }
 
-let emojiboton = true;
-
-function botonTeclEmoji() {
-    if (emojiboton) {
-        document.getElementsByClassName("switch")[0].setAttribute("id", "emojioff");
-        document.getElementsByClassName("switch")[1].setAttribute("id", "tecladoboton");
-        emojiboton = false;
-    } else if (!emojiboton) {
-        document.getElementsByClassName("switch")[0].setAttribute("id", "emojigif");
-        document.getElementsByClassName("switch")[1].setAttribute("id", "tecladobotoff");
-        emojiboton = true;
-    }
+function botonTeclEmoji() { // TODO: Cambia la imagen del emoji por el teclado (OK)
+    let botonemoji = document.getElementById("emojigif");
+    let botontecla = document.getElementById("tecladobotoff");
+    botonemoji.classList.toggle("emojioff");
+    botontecla.classList.toggle("tecladoboton");
 }
 
 /**
  * Cuando el contenedor de los mensajes está lleno, se hace scroll automáticamente 
  * hasta el fondo cada vez que se envía un mensaje, ya que esta función se llama
  * por cada mensaje enviado.
- */ 
+ */
 
-function updateScroll() {
+function updateScroll() { // TODO: Scroll correcto
     let chat = document.getElementsByClassName("msg")[0];
     chat.scrollTop = chat.scrollHeight;
 }
+
+function temaOscuro() { // TODO: Esto es un extra. Activa o desactiva el tema oscuro
+    let body = document.body;
+    body.classList.toggle("darktheme");
+}
+
+document.getElementById("dark").addEventListener("click", function () {
+    temaOscuro();
+});
